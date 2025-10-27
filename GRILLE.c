@@ -1,21 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
-#define X 25
-#define Y 45
-#define jaune "\e[0;33m"
-#define rouge "\e[0;31m"
-#define vert "\e[0;32m"
-#define cyan "\e[0;36m"
+#include "paramitz.h"
 
-#define reset "\e[0m"
 
-void grille(){
+void Grille(char grille[ligne][colonne]){
     int i,j,swap,swap2,swap3;
-    char grille[X][Y];
-    srand(time(NULL));
-    for(i=0;i<X;i++){
-        for(j=0;j<Y;j++){
+    for(i=0;i<ligne;i++){
+        for(j=0;j<colonne;j++){
             swap=1+rand()%5;
             swap2=swap;
             swap3=swap;
@@ -109,31 +98,6 @@ void grille(){
             }
 
 
-
-        if(swap==1){
-            printf(jaune "%c " reset,grille[i][j]);
-        }
-        else if(swap==2){
-            printf(rouge "%c "reset,grille[i][j]);
-        }
-        else if(swap==3){
-            printf(vert "%c "reset,grille[i][j]);
-        }
-        else if(swap==4){
-            printf("%c ",grille[i][j]);
-        }
-        else if(swap==5){
-            printf(cyan"%c "reset,grille[i][j]);
-        }
-
-
     }
-       printf("\n");
 }
-}
-int main(){
-srand(time(NULL));
-grille();
-
-return 0;
 }

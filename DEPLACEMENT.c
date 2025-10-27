@@ -1,58 +1,60 @@
-void deplacement(int *Xjoueur,int *Yjoueur,char touche){
+#include "paramitz.h"
+
+void deplacement(int *xJoueur,int *yJoueur,char touche){
         if(touche=='z'){
-            if(*Yjoueur!=0){
-                *Yjoueur--;
+            if(*yJoueur!=0){
+                *yJoueur--;
             }
 
         }
         if(touche=='s'){
-            if(*Yjoueur!=Y){
-                *Yjoueur++;
+            if(*yJoueur!=colonne){
+                *yJoueur++;
             }
         }
         if(touche=='d'){
-            if(*Xjoueur!=X){
-                *Xjoueur++;
+            if(*xJoueur!=ligne){
+                *xJoueur++;
             }
         }
         if(touche=='q'){
-            if(*Xjoueur!=0){
-                *Xjoueur--;
+            if(*xJoueur!=0){
+                *xJoueur--;
             }
         }
 }
 
-void permutation(char grille[][],int Xjoueur,int Yjoueur,char touche){
+void permutation(char grille[ligne][colonne],int xJoueur,int yJoueur,char touche){
      char swap;
      if(touche=='z'){
-            if(Yjoueur!=0){
-                swap=grille[Xjoueur][Yjoueur];
-                grille[Xjoueur][Yjoueur]=grille[Xjoueur][Yjoueur-1];
-                grille[Xjoueur][Yjoueur-1]=swap;
+            if(yJoueur!=0){
+                swap=grille[xJoueur][yJoueur];
+                grille[xJoueur][yJoueur]=grille[xJoueur][yJoueur-1];
+                grille[xJoueur][yJoueur-1]=swap;
             }
 
         }
         if(touche=='s'){
-            if(Yjoueur!=Y){
-                swap=grille[Xjoueur][Yjoueur];
-                grille[Xjoueur][Yjoueur]=grille[Xjoueur][Yjoueur+1];
-                grille[Xjoueur][Yjoueur+1]=swap;
+            if(yJoueur!=colonne){
+                swap=grille[xJoueur][yJoueur];
+                grille[xJoueur][yJoueur]=grille[xJoueur][yJoueur+1];
+                grille[xJoueur][yJoueur+1]=swap;
             }
 
         }
         if(touche=='d'){
-            if(Xjoueur!=X){
-                swap=grille[Xjoueur][Yjoueur];
-                grille[Xjoueur][Yjoueur]=grille[Xjoueur+1][Yjoueur];
-                grille[Xjoueur+1][Yjoueur]=swap;
+            if(xJoueur!=ligne){
+                swap=grille[xJoueur][yJoueur];
+                grille[xJoueur][yJoueur]=grille[xJoueur+1][yJoueur];
+                grille[xJoueur+1][yJoueur]=swap;
             }
 
         }
         if(touche=='q'){
-            if(Xjoueur!=0){
-                swap=grille[Xjoueur][Yjoueur];
-                grille[Xjoueur][Yjoueur]=grille[Xjoueur-1][Yjoueur];
-                grille[Xjoueur-1][Yjoueur]=swap;
+            if(xJoueur!=0){
+                swap=grille[xJoueur][yJoueur];
+                grille[xJoueur][yJoueur]=grille[xJoueur-1][yJoueur];
+                grille[xJoueur-1][yJoueur]=swap;
             }
         }
 
