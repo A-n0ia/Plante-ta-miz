@@ -1,6 +1,7 @@
+#include "paramitz.h"
+
 void fall(char grille[ligne][colonne]){
     int i,j,k,cpt;
-    char
     for(i=ligne;i>0;i--){
         for(j=0;j<colonne;j++){
             if(grille[i][j]==' '){
@@ -17,3 +18,4 @@ void fall(char grille[ligne][colonne]){
     }
 
 }
+
