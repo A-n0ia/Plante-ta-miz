@@ -29,7 +29,8 @@ void deplacement(int* xJoueur,int* yJoueur,char touche);    //Déplace le joueur
 void permutation(char grille[ligne][colonne],int xJoueur,int yJoueur,char touche);   //Permute un item selectionné avec un autre dans la matrice carré "plateau"
 void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
                                     //Si des 'trous' sont formés, fait tomber les items au-dessus par gravité et ajuste le score en conséquence
-void remplissage(char grille[ligne][colonne]);   //Comble les 'trous' du plateau par des items aléatoires
+void remplissage(char grille[ligne][colonne]);   //Comble les 'trous' du plateau par des items aléatoires*
+void fall(char grille[ligne][colonne]); // fait tomber les items
 int menu();
 
 /*
@@ -41,3 +42,4 @@ int menu();
 */
 
 #endif
+
