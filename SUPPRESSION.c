@@ -3,8 +3,8 @@
 void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
     int i,j,k,a,b;
     char swap;
-    for(i=0;i<colonne;i++){
-        for(j=0;j<ligne;j++){
+    for(i=0;i<ligne;i++){
+        for(j=0;j<colonne;j++){
             //FAIRE DES FONCTIONS POUR CHAQUE MANIERES DE GAGNER DES POINTS ? 
             //VERIF EN LIGNE
 
@@ -14,8 +14,8 @@ void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des
                     k++;
                     if(k>=5){
                         swap=grille[i][j];
-                        for(a=0;a<colonne;a++){
-                            for(b=0;b<ligne;b++){
+                        for(a=0;a<ligne;a++){
+                            for(b=0;b<colonne;b++){
                                 if(grille[a][b]==swap){
                                     grille[a][b]=' ';
                                     *score++;
@@ -23,9 +23,10 @@ void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des
                             }
                         }
                     }
-                }
-            else if(k>=3){
+                    else if(k>=3){
                 *score=*score+4;
+                }
+            
             }
             }
 
@@ -37,8 +38,8 @@ void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des
                     k++;
                     if(k>=5){
                         swap=grille[i][j];
-                        for(a=0;a<colonne;a++){
-                            for(b=0;b<ligne;b++){
+                        for(a=0;a<ligne;a++){
+                            for(b=0;b<colonne;b++){
                                 if(grille[a][b]==swap){
                                     grille[a][b]=' ';
                                     *score++;
@@ -46,12 +47,14 @@ void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des
                             }
                         }
                     }
-                }
                     else if(k>=3){
                         *score=*score+4;
+                    } 
+                   
                     }
                 }
             }
         }
     }
+
 
