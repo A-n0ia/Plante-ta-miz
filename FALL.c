@@ -2,7 +2,7 @@
 
 void fall(char grille[ligne][colonne]){
     int i,j,k,cpt;
-    for(i=ligne;i>0;i--){
+    for(i=ligne;i>1;i--){
         for(j=0;j<colonne;j++){
             if(grille[i][j]==' '){
                     cpt=i;
@@ -18,4 +18,5 @@ void fall(char grille[ligne][colonne]){
     }
 
 }
+
 
