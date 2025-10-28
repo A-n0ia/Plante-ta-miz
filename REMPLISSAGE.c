@@ -1,11 +1,14 @@
 #include "paramitz.h"
 
+
+
 void remplissage(char grille[ligne][colonne]){
-    int i;
+    int i,j;
     char vide;
     srand(time(NULL));
     for(i=0;i<colonne;i++){
-        if(grille[0][i]==' '){
+        for(j=0;j<6;j++)
+            if(grille[i][j]==' '){
             vide=1+rand()%5;
             if(vide==1){
                 grille[i][j]='S';
@@ -24,6 +27,7 @@ void remplissage(char grille[ligne][colonne]){
             }
 
         }
+
 
     }
 
