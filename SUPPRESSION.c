@@ -49,6 +49,7 @@ void suppression(char grille[ligne][colonne],int* score){  //Regarde si une des 
                     }
                     else if(k>=3){
                         *score=*score+4;
+                        
                     } 
                    
                     }
@@ -71,3 +72,4 @@ void suppression(char grille[ligne][colonne],int* score){  //Regarde si une des 
         
         
     }
+
