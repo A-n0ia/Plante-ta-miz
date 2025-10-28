@@ -1,6 +1,6 @@
 #include "paramitz.h"
 
-void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
+void suppression(char grille[ligne][colonne],int* score){  //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
     int i,j,k,a,b;
     char swap;
     for(i=0;i<ligne;i++){
@@ -55,6 +55,19 @@ void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des
                 }
             }
         }
+        //IL MANQUE LE H + LE RECTANGLE 
+        
+        //FAIRE TOMBER LES ITEMS :
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
-
-
