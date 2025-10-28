@@ -7,7 +7,7 @@ void fall(char grille[ligne][colonne]){
             if(grille[i][j]==' '){
                     cpt=i;
                     k=0;
-                    while(cpt!=0){
+                    while(cpt!=1){
                         grille[i+k][j]=grille[i+k+1][j];
                         k++;
                         cpt--;
@@ -18,5 +18,6 @@ void fall(char grille[ligne][colonne]){
     }
 
 }
+
 
 
