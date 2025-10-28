@@ -1,7 +1,5 @@
 #include "paramitz.h"
 
-
-
 void remplissage(char grille[ligne][colonne]){
     int i,j;
     char vide;
@@ -27,9 +25,8 @@ void remplissage(char grille[ligne][colonne]){
             }
 
         }
-
-
+        
     }
 
-
 }
+
