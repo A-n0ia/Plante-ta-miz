@@ -5,7 +5,7 @@ void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelec
     for(int i=0;i<ligne;i++){
         for(int j=0;j<colonne;j++){
             if(tab[i][j]=='S'){
-                if((i==xJoueur)&&(j==yJoueur)){
+                if((i==yJoueur)&&(j==xJoueur)){
                     if(IsSelected){
                         printf("\e[0;101;33m" "%c " reset,tab[i][j]);
                    }
@@ -19,7 +19,7 @@ void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelec
             }
 
             else if(tab[i][j]=='F'){
-                if((i==xJoueur)&&(j==yJoueur)){
+                if((i==yJoueur)&&(j==xJoueur)){
                     if(IsSelected){
                         printf("\e[0;101;31m" "%c " reset,tab[i][j]);
                    }
@@ -33,7 +33,7 @@ void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelec
             }
 
             else if(tab[i][j]=='P'){
-                if((i==xJoueur)&&(j==yJoueur)){
+                if((i==yJoueur)&&(j==xJoueur)){
                     if(IsSelected){
                         printf("\e[0;101;32m" "%c " reset,tab[i][j]);
                    }
@@ -47,7 +47,7 @@ void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelec
             }
 
             else if(tab[i][j]=='O'){
-                if((i==xJoueur)&&(j==yJoueur)){
+                if((i==yJoueur)&&(j==xJoueur)){
                     if(IsSelected){
                         printf(BgRouge "%c " reset,tab[i][j]);
                    }
@@ -61,7 +61,7 @@ void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelec
             }
 
             else if(tab[i][j]=='M'){
-                if((i==xJoueur)&&(j==yJoueur)){
+                if((i==yJoueur)&&(j==xJoueur)){
                     if(IsSelected){
                         printf("\e[0;101;36m" "%c " reset,tab[i][j]);
                    }
