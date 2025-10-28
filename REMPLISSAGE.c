@@ -4,8 +4,8 @@ void remplissage(char grille[ligne][colonne]){
     int i,j;
     char vide;
     srand(time(NULL));
-    for(i=0;i<colonne;i++){
-        for(j=0;j<6;j++)
+    for(i=0;i<1;i++){
+        for(j=0;j<colonne;j++)
             if(grille[i][j]==' '){
             vide=1+rand()%5;
             if(vide==1){
@@ -29,4 +29,5 @@ void remplissage(char grille[ligne][colonne]){
     }
 
 }
+
 
