@@ -31,7 +31,32 @@ void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des
                                     //Si des 'trous' sont formés, fait tomber les items au-dessus par gravité et ajuste le score en conséquence
 void remplissage(char grille[ligne][colonne]);   //Comble les 'trous' du plateau par des items aléatoires*
 void fall(char grille[ligne][colonne]); // fait tomber les items
-int menu();
+
+
+/////// PROTOTYPE DE SOUS-PROGRAMME POUR LE MENU ///////////
+
+/*Fonction qui permet d'éffacer l'écran*/
+void clearConsole();
+/*Fonction qui affiche le titre du jeu en ASCII avec couleur*/
+void afficherTitreJeu();
+/*Fonction qui affiche le menu du jeu en ASCII avec couleur*/
+void afficherMenuTitre();
+void afficherMenuPrincipal(); //Affiche le menu principal
+/*Fonction qui permet de lire le choix du joueur et le retourne */
+int lireChoixMenu();
+/*Fonction de la boucle principale du menu */
+void menuPrincipal();
+
+/////// PROTOTYPE DE SOUS-PROGRAMME POUR LES REGLES DU JEU ///////////
+void attendreTouche(); // Appuyer sur Entrée
+void ReglesComplet();
+void regleObjectif();
+void regleItems();
+void regleCommandes();
+void reglePoints();
+void regleFinPartie();
+void menuRegles();
+
 
 /*
 
@@ -42,4 +67,5 @@ int menu();
 */
 
 #endif
+
 
