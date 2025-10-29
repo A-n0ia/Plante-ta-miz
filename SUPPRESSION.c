@@ -30,7 +30,7 @@ void verifLigne(char grille[ligne][colonne],int* score,int i,int j){    //VERIFI
                }
             }
         }
-        j=j+k;     
+            
     }   
 }
 
@@ -41,7 +41,7 @@ void verifColonne(char grille[ligne][colonne],int* score,int i,int j){        //
     if (grille[i][j] == ' ') return;
     if(grille[i][j]==grille[i+1][j]){
         k=1;
-        while(i + k < colonne && grille[i][j]==grille[i+k][j]){
+        while(i + k < ligne && grille[i][j]==grille[i+k][j]){
             k++;
             if(k>=6){
                 swap=grille[i][j];
@@ -53,8 +53,7 @@ void verifColonne(char grille[ligne][colonne],int* score,int i,int j){        //
                     grille[i + a][j] = ' ';
                 }
             } 
-        }
-        i=i+k;
+        }  
     }
 }
 
@@ -74,6 +73,7 @@ void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIME
 void supprH(char grille[ligne][colonne],int* score,char swap){
     
 }
+
 
 
 
