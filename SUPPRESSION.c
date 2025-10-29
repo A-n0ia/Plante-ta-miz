@@ -13,10 +13,10 @@ void suppression(char grille[ligne][colonne],int* score){  //Regarde si une des 
 void verifLigne(char grille[ligne][colonne],int* score,int i,int j){    //VERIFIER SI IL Y A UN COMBO DE 4 OU 6 SUR UNE LIGNE
     char swap;
     int k,a;
-    if (j + 1 >= ligne) return;
+    if (j + 1 >= colonne) return;
     if(grille[i][j]==grille[i][j+1]){
         k=1;
-        while(grille[i][j]==grille[i][j+k]){
+        while(j + k < colonne && grille[i][j]==grille[i][j+k]){
            k++;
            if(k>=6){
                swap=grille[i][j];
@@ -39,7 +39,7 @@ void verifColonne(char grille[ligne][colonne],int* score,int i,int j){        //
     if (i + 1 >= ligne) return;
     if(grille[i][j]==grille[i+1][j]){
         k=1;
-        while(grille[i][j]==grille[i+k][j]){
+        while(i + k < colonne && grille[i][j]==grille[i+k][j]){
             k++;
             if(k>=6){
                 swap=grille[i][j];
@@ -68,6 +68,7 @@ void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIME
         }
     }
 }
+
 
 
 
