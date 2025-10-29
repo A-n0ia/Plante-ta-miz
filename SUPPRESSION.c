@@ -22,10 +22,10 @@ void verifLigne(char grille[ligne][colonne],int* score,int i,int j){    //VERIFI
                suppr6(grille,swap,score);
             }
             else if(k>=3){
-               *score=*score+4;
+               *score=*score+4;      //SCORE +4 AVEC LIGNE DE 4 ITEMS
             }
         }
-        j=j+k;
+        j=j+k;     
     }   
 }
 
@@ -38,10 +38,10 @@ void verifColonne(char grille[ligne][colonne],int* score,int i,int j){        //
             k++;
             if(k>=5){
                 swap=grille[i][j];
-                suppr6(grille,swap,score);
+                suppr6(grille,score,swap);
             }
             else if(k>=3){
-                *score=*score+4;
+                *score=*score+4;   //SCORE +4 AVEC COLONNE DE 4 ITEMS
             } 
         }
         i=i+k;
@@ -60,5 +60,6 @@ void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIME
         }
     }
 }
+
 
 
