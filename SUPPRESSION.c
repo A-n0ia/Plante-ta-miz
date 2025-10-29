@@ -57,7 +57,7 @@ void verifColonne(char grille[ligne][colonne],int* score,int i,int j){        //
 }
 
 
-void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIMER TOUT LES ITEMS EN CAS DE COMBO 6 
+void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIME TOUT LES ITEMS EN CAS DE COMBO 6 
     int i,j;
     for(i=0;i<ligne;i++){
         for(j=0;j<colonne;j++){
@@ -68,6 +68,7 @@ void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIME
         }
     }
 }
+
 
 
 
