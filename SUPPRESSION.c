@@ -14,6 +14,7 @@ void verifLigne(char grille[ligne][colonne],int* score,int i,int j){    //VERIFI
     char swap;
     int k,a;
     if (j + 1 >= colonne) return;
+    if (grille[i][j] == ' ') return;
     if(grille[i][j]==grille[i][j+1]){
         k=1;
         while(j + k < colonne && grille[i][j]==grille[i][j+k]){
@@ -37,6 +38,7 @@ void verifColonne(char grille[ligne][colonne],int* score,int i,int j){        //
     char swap;
     int k,a;
     if (i + 1 >= ligne) return;
+    if (grille[i][j] == ' ') return;
     if(grille[i][j]==grille[i+1][j]){
         k=1;
         while(i + k < colonne && grille[i][j]==grille[i+k][j]){
@@ -69,6 +71,9 @@ void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIME
     }
 }
 
+void supprH(char grille[ligne][colonne],int* score,char swap){
+    
+}
 
 
 
