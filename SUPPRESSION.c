@@ -8,21 +8,9 @@ void suppression(char grille[ligne][colonne],int* score){  //Regarde si une des 
             verifColonne();
         }           
     }
+ 
 }
 
-                // VERIF EN COLONNE
-
-            
-                   
-                    
-                
-            
-        
-        //IL MANQUE LE H + LE RECTANGLE 
-        
-        //FAIRE TOMBER LES ITEMS : FONCTION FALL
- 
-    }
 void suppr6(char grille[ligne][colonne],int* score){
     int i,j;
     char swap;
@@ -31,25 +19,25 @@ void suppr6(char grille[ligne][colonne],int* score){
         for(j=0;j<colonne;j++){
             if(grille[i][j]==swap){
                 grille[i][j]=' ';
-                *score++;
+                (*score)++;
             }
         }
     }
 }
 
 void verifLigne(char grille[ligne][colonne],int* score){
-            if(grille[i][j]==grille[i][j+1]){
-                k=0;
-                while(grille[i][j]==grille[i][j+k]){
-                    k++;
-                    if(k>=5){
-                        suppr6();
-                    }
-                 }
-            }  
-            else if(k>=3){
-                *score=*score+4;
-            }
+    if(grille[i][j]==grille[i][j+1]){
+        k=0;
+        while(grille[i][j]==grille[i][j+k]){
+           k++;
+               if(k>=5){
+                   suppr6();
+                }
+        }
+    }  
+    else if(k>=3){
+        *score=*score+4;
+    }
 }
 
 void verifColonne(char grille[ligne][colonne],int* score){
@@ -63,7 +51,7 @@ void verifColonne(char grille[ligne][colonne],int* score){
                         for(b=0;b<colonne;b++){
                             if(grille[a][b]==swap){
                                 grille[a][b]=' ';                                    
-                                *score++;
+                                (*score)++;
                             }
                         }
                     }
@@ -76,3 +64,4 @@ void verifColonne(char grille[ligne][colonne],int* score){
         }
     }
 }
+
