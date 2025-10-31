@@ -5,6 +5,8 @@
 #include <time.h>
 #include <string.h>
 #include <windows.h>
+#include <windows.h>
+#include <conio.h>
 #define ligne 15
 #define colonne 25
 #define jaune "\e[0;33m"
@@ -31,6 +33,12 @@ void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des
                                     //Si des 'trous' sont formés, fait tomber les items au-dessus par gravité et ajuste le score en conséquence
 void remplissage(char grille[ligne][colonne]);   //Comble les 'trous' du plateau par des items aléatoires*
 void fall(char grille[ligne][colonne]); // fait tomber les items
+void verifLigne(char grille[ligne][colonne],int* score,int i,int j); //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE LIGNE
+void verifColonne(char grille[ligne][colonne],int* score,int i,int j);        //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE COLONNE
+void suppr6(char grille[ligne][colonne],int* score,char swap);        //SUPPRIME TOUT LES ITEMS EN CAS DE COMBO 6
+void verifRectangleEtH(char grille[ligne][colonne],int *score);
+int cascade(char grille[ligne][colonne], int *score); //// Supprime les combinaisons et applique cascade
+void jeu(); //Pour l'instant niveau 1
 
 
 /////// PROTOTYPE DE SOUS-PROGRAMME POUR LE MENU ///////////
@@ -67,5 +75,6 @@ void menuRegles();
 */
 
 #endif
+
 
 
