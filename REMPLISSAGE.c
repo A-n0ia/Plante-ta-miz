@@ -2,27 +2,27 @@
 
 void remplissage(char grille[ligne][colonne]){
     int j,vide;
-    srand(time(NULL));
         for(j=0;j<colonne;j++)
             if(grille[0][j]==' '){
                 vide=1+rand()%5;
                 if(vide==1){
-                    grille[i][j]='S';
+                    grille[0][j]='S';
                 }
                 else if(vide==2){
-                    grille[i][j]='F';
+                    grille[0][j]='F';
                 }
                 else if(vide==3){
-                    grille[i][j]='P';
+                    grille[0][j]='P';
                 }
                 else if(vide==4){
-                    grille[i][j]='O';
+                    grille[0][j]='O';
                 }
                 else if(vide==5){
-                    grille[i][j]='M';
+                    grille[0][j]='M';
                 }
             }
 }
+
 
 
 
