@@ -248,6 +248,7 @@ void menuPrincipal(){
         switch(choix){
             case 1:
                 // sous-programme qui permet de lancer une nouvelle partie
+                jeu();
                 break;
             case 2:
                 // sous-programme qui permet de reprendre une partie
