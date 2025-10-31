@@ -244,7 +244,6 @@ void deplacement(int *xJoueur,int *yJoueur,char touche){
 void remplissage(char grille[ligne][colonne]){
     int i,j;
     char vide;
-    srand(time(NULL));
     for (i=0;i<ligne;i++){
         for (j=0;j<colonne;j++){
             if(grille[i][j]=' '){
@@ -320,7 +319,6 @@ void verifLigne(char grille[ligne][colonne],int* score,int i,int j){    //VERIFI
                }
             }
         }
-
     }
 }
 
