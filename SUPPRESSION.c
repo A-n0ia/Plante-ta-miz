@@ -23,11 +23,11 @@ void verifLigne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scor
     if (k >= 6) {
         suppr6(grille, scoreS, scoreF, scoreP, scoreO, scoreM, grille[i][j]);
     } else if (k >= 4) {
-        if(grille[i][j]=='S') (*scoreS)=+4;
-        else if(grille[i][j]=='F') (*scoreF)=+4;
-        else if(grille[i][j]=='P') (*scoreP)=+4;
-        else if(grille[i][j]=='O') (*scoreO)=+4;
-        else if(grille[i][j]=='M') (*scoreM)=+4;
+        if(grille[i][j]=='S') (*scoreS)+=4;
+        else if(grille[i][j]=='F') (*scoreF)+=4;
+        else if(grille[i][j]=='P') (*scoreP)+=4;
+        else if(grille[i][j]=='O') (*scoreO)+=4;
+        else if(grille[i][j]=='M') (*scoreM)+=4;
         for (a = 0; a < k; a++) {
             grille[i][j + a] = ' ';
         }
@@ -44,11 +44,11 @@ void verifColonne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* sc
     if (k >= 6) {
         suppr6(grille, scoreS, scoreF, scoreP, scoreO, scoreM, grille[i][j]);
     } else if (k >= 4) {
-        if(grille[i][j]=='S') (*scoreS)=+4;
-        else if(grille[i][j]=='F') (*scoreF)=+4;
-        else if(grille[i][j]=='P') (*scoreP)=+4;
-        else if(grille[i][j]=='O') (*scoreO)=+4;
-        else if(grille[i][j]=='M') (*scoreM)=+4;
+        if(grille[i][j]=='S') (*scoreS)+=4;
+        else if(grille[i][j]=='F') (*scoreF)+=4;
+        else if(grille[i][j]=='P') (*scoreP)+=4;
+        else if(grille[i][j]=='O') (*scoreO)+=4;
+        else if(grille[i][j]=='M') (*scoreM)+=4;
         for (a = 0; a < k; a++) {
             grille[i + a][j] = ' ';
         }
@@ -74,6 +74,7 @@ void suppr6(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, 
 void supprH(char grille[ligne][colonne],int* score,char swap){
     
 }
+
 
 
 
