@@ -5,7 +5,6 @@
 #include <time.h>
 #include <string.h>
 #include <windows.h>
-#include <windows.h>
 #include <conio.h>
 #define ligne 15
 #define colonne 25
@@ -22,23 +21,31 @@
 //                Hésitez pas à changer le nom des fonctions que vous codez ou à rajouter d'autres fonctions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+void jouer(int* scoreS,int* scoreF,int* scoreP,int* scoreO,int* scoreM);
 void afficheCadre(int largeur,int hauteur);     // Fonction déja fournie dans d'anciens TP
 void Grille(char grille[ligne][colonne]);            //Remplis le plateau en respectant les conditions initiales
 void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelected);   //Affiche la matrice à l'écran avec les bonnes couleurs et la "position" du joueur
                                                                         //IsSelected permet de savoir si la case est sélectionnée,auquel cas elle sera mise en évidence (item en minuscule,etc...)
-void deplacement(int* xJoueur,int* yJoueur,char touche);    //Déplace le joueur dans les limites du plateau
-void permutation(char grille[ligne][colonne],int xJoueur,int yJoueur,char touche);   //Permute un item selectionné avec un autre dans la matrice carré "plateau"
-void suppression(char grille[ligne][colonne],int* score);   //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
-                                    //Si des 'trous' sont formés, fait tomber les items au-dessus par gravité et ajuste le score en conséquence
-void remplissage(char grille[ligne][colonne]);   //Comble les 'trous' du plateau par des items aléatoires*
-void fall(char grille[ligne][colonne]); // fait tomber les items
-void verifLigne(char grille[ligne][colonne],int* score,int i,int j); //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE LIGNE
-void verifColonne(char grille[ligne][colonne],int* score,int i,int j);        //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE COLONNE
-void suppr6(char grille[ligne][colonne],int* score,char swap);        //SUPPRIME TOUT LES ITEMS EN CAS DE COMBO 6
+/*
+            Non-testé pour le moment
 void verifRectangleEtH(char grille[ligne][colonne],int *score);
 int cascade(char grille[ligne][colonne], int *score); //// Supprime les combinaisons et applique cascade
 void jeu(); //Pour l'instant niveau 1
+*/
+
+
+void deplacement(int* xJoueur,int* yJoueur,char touche);    //Déplace le joueur dans les limites du plateau
+void permutation(char grille[ligne][colonne],int xJoueur,int yJoueur,char touche);   //Permute un item selectionné avec un autre dans la matrice carré "plateau"
+void suppression(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM);   //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
+                                    //Si des 'trous' sont formés, fait tomber les items au-dessus par gravité et ajuste le score en conséquence
+int verifLigne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, int i, int j);
+int verifColonne(char grille[ligne][colonne],int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, int i, int j);
+void suppr6(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, char swap);
+
+void remplissage(char grille[ligne][colonne],int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM);   //Comble les 'trous' du plateau par des items aléatoires*
+void fall(char grille[ligne][colonne]); // fait tomber les items
+void gotoxy(int x,int y);
+void hide_cursor();
 
 
 /////// PROTOTYPE DE SOUS-PROGRAMME POUR LE MENU ///////////
@@ -53,7 +60,7 @@ void afficherMenuPrincipal(); //Affiche le menu principal
 /*Fonction qui permet de lire le choix du joueur et le retourne */
 int lireChoixMenu();
 /*Fonction de la boucle principale du menu */
-void menuPrincipal();
+//void menuPrincipal();
 
 /////// PROTOTYPE DE SOUS-PROGRAMME POUR LES REGLES DU JEU ///////////
 void attendreTouche(); // Appuyer sur Entrée
@@ -75,6 +82,5 @@ void menuRegles();
 */
 
 #endif
-
 
 
