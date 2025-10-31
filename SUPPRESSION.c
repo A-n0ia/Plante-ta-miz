@@ -1,78 +1,85 @@
 #include "paramitz.h"
 
-void suppression(char grille[ligne][colonne],int* score){  //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
-    int i,j;
-    for(i=0;i<ligne;i++){
-        for(j=0;j<colonne;j++){
-            verifLigne(grille,score,i,j);
-            verifColonne(grille,score,i,j);
-        }           
+void suppression(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM) {    //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
+
+    int i, j;
+    for (i = 0; i < ligne; i++) {
+        for (j = 0; j < colonne; j++) {
+            verifLigne(grille, scoreS, scoreF, scoreP, scoreO, scoreM, i, j);
+            verifColonne(grille, scoreS, scoreF, scoreP, scoreO, scoreM, i, j);
+        }
     }
 }
 
-void verifLigne(char grille[ligne][colonne],int* score,int i,int j){    //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE LIGNE
-    char swap;
-    int k,a;
-    if (j + 1 >= colonne) return;
+void verifLigne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, int i, int j) {   //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE LIGNE
+    int k, a;
+    if (j + 1 >= colonne) return;                                         
     if (grille[i][j] == ' ') return;
-    if(grille[i][j]==grille[i][j+1]){
-        k=1;
-        while(j + k < colonne && grille[i][j]==grille[i][j+k]){
-           k++;
-           if(k>=6){
-               swap=grille[i][j];
-               suppr6(grille,score,swap);
-            }
-            else if(k>=4){
-               *score=*score+4;      //SCORE +4 AVEC LIGNE DE 4 ITEMS
-               for (a = 0; a < k; a++) {
-                   grille[i][j + a] = ' ';
-               }
-            }
-        }
-            
-    }   
-}
 
-void verifColonne(char grille[ligne][colonne],int* score,int i,int j){        //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE COLONNE
-    char swap;
-    int k,a;
+    k = 1;
+    while (j + k < colonne && grille[i][j] == grille[i][j + k]) {
+        k++;
+    }
+
+    if (k >= 6) {
+        suppr6(grille, scoreS, scoreF, scoreP, scoreO, scoreM, grille[i][j]);
+    } else if (k >= 4) {
+        if(grille[i][j]=='S') (*scoreS)=+4;
+        else if(grille[i][j]=='F') (*scoreF)=+4;
+        else if(grille[i][j]=='P') (*scoreP)=+4;
+        else if(grille[i][j]=='O') (*scoreO)=+4;
+        else if(grille[i][j]=='M') (*scoreM)=+4;
+        for (a = 0; a < k; a++) {
+            grille[i][j + a] = ' ';
+        }
+    }
+}
+ //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE COLONNE
+void verifColonne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, int i, int j) {
+    int k, a;
     if (i + 1 >= ligne) return;
     if (grille[i][j] == ' ') return;
-    if(grille[i][j]==grille[i+1][j]){
-        k=1;
-        while(i + k < ligne && grille[i][j]==grille[i+k][j]){
-            k++;
-            if(k>=6){
-                swap=grille[i][j];
-                suppr6(grille,score,swap);
-            }
-            else if(k>=4){
-                *score=*score+4;                                  //SCORE +4 AVEC COLONNE DE 4 ITEMS
-                for (a = 0; a < k; a++) {
-                    grille[i + a][j] = ' ';
-                }
-            } 
-        }  
+
+    k = 1;
+    while (i + k < ligne && grille[i][j] == grille[i + k][j]) {
+        k++;
+    }
+
+    if (k >= 6) {
+        suppr6(grille, scoreS, scoreF, scoreP, scoreO, scoreM, grille[i][j]);
+    } else if (k >= 4) {
+        if(grille[i][j]=='S') (*scoreS)=+4;
+        else if(grille[i][j]=='F') (*scoreF)=+4;
+        else if(grille[i][j]=='P') (*scoreP)=+4;
+        else if(grille[i][j]=='O') (*scoreO)=+4;
+        else if(grille[i][j]=='M') (*scoreM)=+4;
+        for (a = 0; a < k; a++) {
+            grille[i + a][j] = ' ';
+        }
     }
 }
-
-
-void suppr6(char grille[ligne][colonne],int* score,char swap){        //SUPPRIME TOUT LES ITEMS EN CAS DE COMBO 6 
-    int i,j;
-    for(i=0;i<ligne;i++){
-        for(j=0;j<colonne;j++){
-            if(grille[i][j]==swap){
-                grille[i][j]=' ';
-                (*score)++;
+ //SUPPRIME TOUT LES ITEMS EN CAS DE COMBO 6 
+void suppr6(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, char swap) {
+    int i, j;
+    for (i = 0; i < ligne; i++) {
+        for (j = 0; j < colonne; j++) {
+            if (grille[i][j] == swap) {
+                if(grille[i][j]=='S') (*scoreS)++;
+                else if(grille[i][j]=='F') (*scoreF)++;
+                else if(grille[i][j]=='P') (*scoreP)++;
+                else if(grille[i][j]=='O') (*scoreO)++;
+                else if(grille[i][j]=='M') (*scoreM)++;
+				grille[i][j] = ' ';
             }
         }
     }
+}
 }
 
 void supprH(char grille[ligne][colonne],int* score,char swap){
     
 }
+
 
 
 
