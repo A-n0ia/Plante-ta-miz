@@ -1,32 +1,31 @@
 #include "paramitz.h"
 
-void remplissage(char grille[ligne][colonne]){
-    int j,vide;
+void remplissage(char grille[ligne][colonne],int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM){
+    int i,j;
+    char vide;
+    for(i=0;i<ligne;i++){
         for(j=0;j<colonne;j++)
-            if(grille[0][j]==' '){
+            if(grille[i][j]==' '){
                 vide=1+rand()%5;
                 if(vide==1){
-                    grille[0][j]='S';
+                    grille[i][j]='S';
                 }
                 else if(vide==2){
-                    grille[0][j]='F';
+                    grille[i][j]='F';
                 }
                 else if(vide==3){
-                    grille[0][j]='P';
+                    grille[i][j]='P';
                 }
                 else if(vide==4){
-                    grille[0][j]='O';
+                    grille[i][j]='O';
                 }
                 else if(vide==5){
-                    grille[0][j]='M';
+                    grille[i][j]='M';
                 }
+
             }
+    }
+    suppression(grille,scoreS,scoreF,scoreP,scoreO,scoreM);
 }
-
-
-
-
-
-
 
 
