@@ -1,7 +1,6 @@
 #include "paramitz.h"
 
 void suppression(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM) {    //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
-
     int i, j;
     for (i = 0; i < ligne; i++) {
         for (j = 0; j < colonne; j++) {
@@ -34,17 +33,14 @@ void verifLigne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scor
         }
     }
 }
- //VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE COLONNE
-void verifColonne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, int i, int j) {
+void verifColonne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, int i, int j) { 		//VERIFIE SI IL Y A UN COMBO DE 4 OU 6 SUR UNE COLONNE
     int k, a;
     if (i + 1 >= ligne) return;
     if (grille[i][j] == ' ') return;
-
     k = 1;
     while (i + k < ligne && grille[i][j] == grille[i + k][j]) {
         k++;
     }
-
     if (k >= 6) {
         suppr6(grille, scoreS, scoreF, scoreP, scoreO, scoreM, grille[i][j]);
     } else if (k >= 4) {
@@ -58,8 +54,7 @@ void verifColonne(char grille[ligne][colonne], int* scoreS, int* scoreF, int* sc
         }
     }
 }
- //SUPPRIME TOUT LES ITEMS EN CAS DE COMBO 6 
-void suppr6(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, char swap) {
+void suppr6(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM, char swap) { 		//SUPPRIME TOUT LES ITEMS EN CAS DE COMBO 6 
     int i, j;
     for (i = 0; i < ligne; i++) {
         for (j = 0; j < colonne; j++) {
@@ -74,11 +69,12 @@ void suppr6(char grille[ligne][colonne], int* scoreS, int* scoreF, int* scoreP, 
         }
     }
 }
-}
+
 
 void supprH(char grille[ligne][colonne],int* score,char swap){
     
 }
+
 
 
 
