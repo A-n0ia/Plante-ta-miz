@@ -1,7 +1,12 @@
 #include "paramitz.h"
 
 
-void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelected){
+void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelected,Scores* pScore,Contract* objectives,int level){
+    gotoxy(0, ligne+3);
+    printf(jaune"S"reset" : %d / %d\t"rouge"F"reset" : %d / %d\t"vert"P"reset" : %d / %d\tO : %d / %d\t"cyan"M"reset" : %d / %d",(*pScore).scoreS,objectives->scoreS,(*pScore).scoreF,objectives->scoreF,(*pScore).scoreP,objectives->scoreP,(*pScore).scoreO,objectives->scoreO,(*pScore).scoreM,objectives->scoreM);
+    gotoxy(0,ligne+2);
+    printf("level = %d",level);
+    gotoxy(0,0);
     for(int i=0;i<ligne;i++){
         for(int j=0;j<colonne;j++){
             if(tab[i][j]=='S'){
@@ -72,6 +77,23 @@ void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelec
                 else{
                     printf(cyan "%c " reset,tab[i][j]);
                 }
+            }
+            else if(tab[i][j]==' '){
+                printf("  ");
+            }
+            else if(tab[i][j]=='B'){
+                if((i==yJoueur)&&(j==xJoueur)){
+                    if(IsSelected){
+                        printf(BgRouge "%c " reset,0x0F);
+                   }
+                   else{
+                        printf(BgVert "%c " reset,0x0F);
+                   }
+                }
+                else{
+                    printf("%c ",0x0F);
+                }
+
             }
         }
         printf("\n");

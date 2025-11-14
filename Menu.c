@@ -8,9 +8,23 @@ void clearConsole() {
 #endif
 }
 
-void attendreTouche(){
-    printf("\nAppuyer sur la touche ENTREE pour continuer....");
-    getchar();
+void attendreTouche() {
+    int a=0;
+    // Vider stdin s’il y a des touches déjà pressées
+    while (_kbhit()) _getch();
+
+    printf("\nAppuyez sur la touche ENTREE pour continuer...");
+    fflush(stdout);
+
+    // Attendre jusqu’à ce que l’utilisateur appuie sur Entrée
+    while (a==0) {
+        if (_kbhit()) {
+            int c = _getch();
+            if (c == '\r' || c == '\n')
+                a=1;
+        }
+        Sleep(10); // éviter de consommer 100 % du CPU
+    }
 }
 
 
@@ -18,19 +32,19 @@ void afficherTitreJeu() {
     printf("\033[1;33m"); // couleur jaune
 
     int marge = 43; // Nombre d'espaces à gauche pour centrer le texte
-    for (int i = 0; i < marge; i++) printf(" "); printf("===================================\n");
-    for (int i = 0; i < marge; i++) printf(" "); printf(" _   _  _____  _     _     ____   \n");
-    for (int i = 0; i < marge; i++) printf(" "); printf("| | | || ____|| |   | |   /  _ \\ \n");
-    for (int i = 0; i < marge; i++) printf(" "); printf("| |_| ||  _|  | |   | |   | | | |  \n");
-    for (int i = 0; i < marge; i++) printf(" "); printf("|  _  || |___ | |___| |___| |_| |\n");
-    for (int i = 0; i < marge; i++) printf(" "); printf("|_| |_||_____||_____|_____\\____/  \n");
-    for (int i = 0; i < marge; i++) printf(" "); printf("===================================\n\n");
+    for (int i = 0; i < marge; i++){ printf(" ");} printf("===================================\n");
+    for (int i = 0; i < marge; i++){ printf(" ");} printf(" _   _  _____  _     _     ____   \n");
+    for (int i = 0; i < marge; i++){ printf(" ");} printf("| | | || ____|| |   | |   /  _ \\ \n");
+    for (int i = 0; i < marge; i++){ printf(" ");} printf("| |_| ||  _|  | |   | |   | | | |  \n");
+    for (int i = 0; i < marge; i++){ printf(" ");} printf("|  _  || |___ | |___| |___| |_| |\n");
+    for (int i = 0; i < marge; i++){ printf(" ");} printf("|_| |_||_____||_____|_____\\____/  \n");
+    for (int i = 0; i < marge; i++){ printf(" ");} printf("===================================\n\n");
 
-    for (int i = 0; i < marge + 6; i++) printf(" "); // petit décalage en plus pour centrer le sous-titre
-    printf("BIENVENUE SUR PLANTAMITZ !\n");
-
-    for (int i = 0; i < marge; i++) printf(" "); printf("===================================\n");
-    printf("\033[0m"); // couleur normale
+    for (int i = 0; i < marge + 6; i++) printf(" ");{ // petit décalage en plus pour centrer le sous-titre
+        printf("BIENVENUE SUR PLANTAMITZ !\n");
+    }
+    for (int i = 0; i < marge; i++){ printf(" ");}
+    printf("===================================\n"reset);
 }
 
 
@@ -38,30 +52,30 @@ void afficherMenuTitre() {
     printf("\033[1;33m"); // couleur jaune
     int marge = 43; // Nombre d'espaces à gauche pour centrer le texte
 
-    for (int i = 0; i < marge; i++) printf(" ");printf("==============================\n");
-    for (int i = 0; i < marge; i++) printf(" ");printf(" __  __  _____ _    _   _   _   \n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("|  \\/  || ____| \\ || | | | | \n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("| |\\/| ||  _| |  \\|| | | | |  \n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("| |  | || |___| |\\  | | |_| |  \n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("|_|  |_||_____|_| \\_| \\___//   \n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("==============================\n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("\033[0m"); // reset couleur
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("==============================\n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf(" __  __  ______ _    _  _   _   \n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("|  \\/  || ____| \\ || | | | | \n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("| |\\/| ||  _| |  \\|| | | | |  \n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("| |   | || |___| |\\ | | |_| |  \n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("|_|   |_||_____|_| \\| \\___//   \n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("==============================\n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("\033[0m"); // reset couleur
 }
 
 void afficherMenuPrincipal(){
     //printf("=== BIENVENUE SUR PLANTAMITZ ! ===\n");
     int marge =43;
     printf("1. Nouvelle partie\n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("2. Reprendre la partie\n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("3. Regles du jeu\n");
-    for (int i = 0; i < marge; i++) printf(" ");printf("0. Quitter\n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("2. Reprendre la partie\n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("3. Regles du jeu\n");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("0. Quitter\n");
 }
 
 int lireChoixMenu(){
     int marge=43;
     int choix;
     int resultatScan;
-    for (int i = 0; i < marge; i++) printf(" ");printf("CHOIX :");
+    for (int i = 0; i < marge; i++){ printf(" ");}printf("CHOIX :");
     do{
         resultatScan=scanf("%d",&choix);
         if(resultatScan !=1){
@@ -221,32 +235,3 @@ void menuRegles(){
         }
     }while(choix!=0);
 }
-
-/*void menuPrincipal(){
-    int choix;
-    do{
-        clearConsole();
-        afficherTitreJeu();
-        Sleep(3000);
-        clearConsole();
-        afficherMenuTitre();
-        afficherMenuPrincipal();
-        choix=lireChoixMenu();
-        switch(choix){
-            case 1:
-                // sous-programme qui permet de lancer une nouvelle partie
-                break;
-            case 2:
-                // sous-programme qui permet de reprendre une partie
-                break;
-            case 3:
-                // sous-programme qui affiche les règles du jeu
-                clearConsole();
-                menuRegles();
-                break;
-            case 0 :
-                printf("AU REVOIR !\n");
-                break;
-        }
-    }while(choix!=0);
-}*/

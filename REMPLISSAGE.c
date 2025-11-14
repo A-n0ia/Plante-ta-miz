@@ -1,31 +1,56 @@
 #include "paramitz.h"
 
-void remplissage(char grille[ligne][colonne],int* scoreS, int* scoreF, int* scoreP, int* scoreO, int* scoreM){
+void remplissage(char grille[ligne][colonne],int xJoueur,int yJoueur,int IsSelected,int level){
     int i,j;
     char vide;
-    for(i=0;i<ligne;i++){
-        for(j=0;j<colonne;j++)
-            if(grille[i][j]==' '){
-                vide=1+rand()%5;
-                if(vide==1){
-                    grille[i][j]='S';
-                }
-                else if(vide==2){
-                    grille[i][j]='F';
-                }
-                else if(vide==3){
-                    grille[i][j]='P';
-                }
-                else if(vide==4){
-                    grille[i][j]='O';
-                }
-                else if(vide==5){
-                    grille[i][j]='M';
-                }
-
+    if(level==1){
+        for(j=0;j<colonne;j++){
+        if(grille[0][j]==' '){
+            vide=1+rand()%5;
+            if(vide==1){
+                grille[0][j]='S';
             }
+            else if(vide==2){
+                grille[0][j]='F';
+            }
+            else if(vide==3){
+                grille[0][j]='P';
+            }
+            else if(vide==4){
+                grille[0][j]='O';
+            }
+            else if(vide==5){
+                grille[0][j]='M';
+            }
+        }
+        }
     }
-    suppression(grille,scoreS,scoreF,scoreP,scoreO,scoreM);
+
+    else if(level>=2){
+     for(j=0;j<colonne;j++){
+        if(grille[0][j]==' '){
+            vide=0+rand()%105;
+            if(vide<=20){
+                grille[0][j]='S';
+            }
+            else if(vide<=40){
+                grille[0][j]='F';
+            }
+            else if(vide<=60){
+                grille[0][j]='P';
+            }
+            else if(vide<=80){
+                grille[0][j]='O';
+            }
+            else if(vide<=100){
+                grille[0][j]='M';
+            }
+            else{
+                grille[0][j]='B';
+            }
+        }
+        }
+    }
 }
 
 

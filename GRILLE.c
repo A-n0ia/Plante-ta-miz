@@ -1,9 +1,10 @@
 #include "paramitz.h"
 
 
-void Grille(char grille[ligne][colonne]){
+void Grille(char grille[ligne][colonne],int level){
     int i,j,swap,swap2,swap3;
-    for(i=0;i<ligne;i++){
+    if(level==1){
+        for(i=0;i<ligne;i++){
         for(j=0;j<colonne;j++){
             swap=1+rand()%5;
             swap2=swap;
@@ -99,5 +100,121 @@ void Grille(char grille[ligne][colonne]){
 
 
     }
-}
+    }
+    }
+
+    else if(level>=2){
+        for(i=0;i<ligne;i++){
+        for(j=0;j<colonne;j++){
+            swap=rand()%105;
+            swap2=swap;
+            swap3=swap;
+            if(swap<=20){
+                grille[i][j]='S';
+            }
+            else if(swap<=40){
+                grille[i][j]='F';
+            }
+            else if(swap<=60){
+                grille[i][j]='P';
+            }
+            else if(swap<=80){
+                grille[i][j]='O';
+            }
+            else if(swap<=100){
+                grille[i][j]='M';
+            }
+            else{
+                grille[i][j]='B';
+            }
+
+            if(grille[i][j]==grille[i][j-1] && grille[i][j]==grille[i][j-2]){ //CHANGE 3 A LA SUITE EN LIGNE
+                do{
+                    swap2=rand()%105;
+
+                }while(swap==swap2);
+                swap=swap2;
+
+                if(swap<=20){
+                    grille[i][j]='S';
+                }
+                else if(swap<=40){
+                grille[i][j]='F';
+            }
+            else if(swap<=60){
+                grille[i][j]='P';
+            }
+            else if(swap<=80){
+                grille[i][j]='O';
+            }
+            else if(swap<=100){
+                grille[i][j]='M';
+            }
+            else{
+                grille[i][j]='B';
+            }
+
+            }
+
+            if(grille[i][j]==grille[i-1][j] && grille[i][j]==grille[i-2][j]){    //CHANGE 3 A LA SUITE EN COLONNE
+                do{
+                    swap2=rand()%105;
+
+                }while(swap==swap2);
+                swap=swap2;
+
+                if(swap<=20){
+                    grille[i][j]='S';
+                }
+                else if(swap<=40){
+                grille[i][j]='F';
+            }
+            else if(swap<=60){
+                grille[i][j]='P';
+            }
+            else if(swap<=80){
+                grille[i][j]='O';
+            }
+            else if(swap<=100){
+                grille[i][j]='M';
+            }
+            else{
+                grille[i][j]='B';
+            }
+
+            }
+            //test
+            if(grille[i][j]==grille[i][j-1] && grille[i][j]==grille[i][j-2]){ //CHANGE 3 A LA SUITE EN LIGNE
+                do{
+                    swap2=rand()%105;
+
+                }while(swap2==swap || swap2==swap3);
+                swap=swap2;
+
+                if(swap<=20){
+                    grille[i][j]='S';
+                }
+                else if(swap<=40){
+                grille[i][j]='F';
+            }
+            else if(swap<=60){
+                grille[i][j]='P';
+            }
+            else if(swap<=80){
+                grille[i][j]='O';
+            }
+            else if(swap<=100){
+                grille[i][j]='M';
+            }
+            else{
+                grille[i][j]='B';
+            }
+
+            }
+
+
+    }
+    }
+    }
+
 }
