@@ -41,5 +41,5 @@ Plantamiz est un projet étudiant visant à recréer une sorte de "Candy Crush" 
     Sauvegarde du joueur et niveaux
     Possibilitée de recommencer ou de quitter
 
-    === FIN DES RÈGLES ===
+=== FIN DES RÈGLES ===
     
