@@ -1,0 +1,6 @@
+git commit -m "feat: enhance combo chain reactions
+
+- Implement cascade detection for falling items
+- Add progressive multiplier (x2, x3, x5)
+- Chain reaction visual effects with delays
+- Bonus points for multi-combo in one move"
