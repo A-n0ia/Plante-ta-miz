@@ -1,0 +1,6 @@
+git commit -m "feat: implement progressive level system
+
+- 10 levels with increasing difficulty
+- Unique objectives per level (score, combos, time)
+- Level-specific obstacles and challenges
+- Unlockable content and achievements"
