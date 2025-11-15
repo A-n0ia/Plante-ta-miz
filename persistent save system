@@ -1,0 +1,6 @@
+git commit -m "feat: add persistent save system
+
+- Player profile with statistics tracking
+- Multiple save slots with timestamps
+- Auto-save every 5 moves and level completion
+- Data integrity checks and corruption recovery"
