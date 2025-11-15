@@ -1,0 +1,6 @@
+git commit -m "feat: enhance UI/UX with colors and animations
+
+- ANSI color coding for different item types
+- Animated selection cursor with blink effect
+- Smooth item falling animations
+- Improved menu navigation with visual feedback"
