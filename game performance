@@ -1,6 +1,0 @@
-git commit -m "perf: optimize game engine performance
-
-- Double buffering for flicker-free rendering
-- Efficient collision detection algorithms
-- Memory pooling for frequent allocations
-- Optimized grid manipulation functions"
