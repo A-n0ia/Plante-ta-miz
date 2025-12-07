@@ -1,5 +1,13 @@
 #include "paramitz.h"
 
+
+/*Les fonctions gotoxy(int x, int y) et hide_cursor() ont été récupérées sur le boostcamp
+la fonction get_input() admettant les flèches directionnelles a été créer en partenariat avec le web :)
+Les "ASCII ART" ('HELLO' ET 'MENU' dans Menu.c) sont susceptibles d'avoir été créé à l'aide de site dédié (l'ascii art, et uniquement ça)
+Tout les reste ou presque est fruit du travail original de Projet_Informatique_LETOURNEUR-LOUBINOUX-SISON-DATHEVY (marque déposé)
+
+*/
+
 typedef struct scores{
     int scoreS;
     int scoreF;
@@ -13,6 +21,7 @@ typedef struct player{
     char name[20];
     int level;
     int lives;
+    int gold;
     int current_best_score;
     int all_time_best_score;
 }Player;
@@ -42,6 +51,25 @@ void hide_cursor(){
     SetConsoleCursorInfo(cH,&inf);
 }
 
+int get_input() {
+    int touche = getch();
+
+    if (touche == 224) {  // touche étendue (flèches)
+        int t2 = getch();
+        switch (t2) {
+            case 72: return 'z';
+            case 80: return 's';
+            case 75: return 'q';
+            case 77: return 'd';
+        }
+        return 0;
+    }
+
+    return touche;
+}
+
+
+
 Contract* objectifs(Contract* objectives,int level){
     if(level==1){
         objectives->scoreF=10+rand()% 21;
@@ -52,10 +80,17 @@ Contract* objectifs(Contract* objectives,int level){
     }
     else if(level==2){
         objectives->scoreO=40;
-        objectives->scoreS=23;
+        objectives->scoreS=27;
         objectives->scoreF=16;
         objectives->scoreP=13;
         objectives->scoreM=0;
+    }
+    else if(level>=3){
+        objectives->scoreO=33;
+        objectives->scoreS=73;
+        objectives->scoreF=22;
+        objectives->scoreP=13;
+        objectives->scoreM=27;
     }
     return objectives;
 }
@@ -83,6 +118,7 @@ Player* initJoueur(Player* pJoueur){
     scanf("%s",pJoueur->name);
     pJoueur->level=1;
     pJoueur->lives=5;
+    pJoueur->gold=0;
     pJoueur->current_best_score=0;
     pJoueur->all_time_best_score=0;
     return pJoueur;
@@ -119,6 +155,10 @@ int partie(Scores* pScore,Contract* objectives,Player* pJoueur){
             printf("Voulez-vous continuer ?\t\tEntrer 1 pour OUI ou 2 pour NON");
             continuer=getch();
         }
+        if(pJoueur->gold>=1099){
+            pJoueur->gold=888;
+        }
+        pJoueur->gold=pJoueur->gold/2;
         if(continuer=='1'){
             clearConsole();
             gotoxy(0,5);
@@ -138,30 +178,42 @@ int partie(Scores* pScore,Contract* objectives,Player* pJoueur){
         if(pJoueur->level<3){
             pJoueur->level+=1;
             animation_nv(pJoueur->name,pJoueur->level);
-            gotoxy(25,20);
-            while ((c = getchar()) != '\n' && c != EOF);
+        }
+        else{
+            gotoxy(20,15);
+            printf("FELICITATION, vous avez termine le dernier niveaux !");
+            gotoxy(22,0);
+            printf("Vous pouvez soit recommencer le niveaux et tenter d'améliorer votre meilleur score ou vous arreter là");
+        }
+        gotoxy(25,20);
+        while ((c = getchar()) != '\n' && c != EOF);
+        printf("Voulez-vous continuer ?\t\tEntrer 1 pour OUI ou 2 pour NON");
+        continuer=getch();
+        while((continuer < '0') || (continuer > '9')){
+            printf(rouge"    Entree invalide\n"reset);
             printf("Voulez-vous continuer ?\t\tEntrer 1 pour OUI ou 2 pour NON");
             continuer=getch();
-            while((continuer < '0') || (continuer > '9')){
-                printf(rouge"    Entree invalide\n"reset);
-                printf("Voulez-vous continuer ?\t\tEntrer 1 pour OUI ou 2 pour NON");
-                continuer=getch();
-            }
-            if(continuer=='1'){
-                clearConsole();
-                gotoxy(0,5);
-                printf("Vous avez choisi de continuer, il vous reste %d vies pour completer le niveaux %d",pJoueur->lives,pJoueur->level);
-                gotoxy(0,10);
-                attendreTouche();
-                return 1;
-            }
-            else{
-                clearConsole();
-                gotoxy(0,5);
-                printf("Vous avez choisi d'arreter, vous pourrer toujours recharger votre sauvegarde plus tard ou commencer une nouvelle partie\n");
-                return 0;
-            }
-
+        }
+        if(pJoueur->gold>=1099){
+            pJoueur->gold=888;
+        }
+        pScore->score_total=pScore->scoreF+pScore->scoreM+pScore->scoreO+pScore->scoreP+pScore->scoreS;
+        if(pJoueur->current_best_score<pScore->score_total){
+            pJoueur->current_best_score;
+        }
+        if(continuer=='1'){
+            clearConsole();
+            gotoxy(0,5);
+            printf("Vous avez choisi de continuer, il vous reste %d vies pour completer le niveaux %d",pJoueur->lives,pJoueur->level);
+            gotoxy(0,10);
+            attendreTouche();
+            return 1;
+        }
+        else{
+            clearConsole();
+            gotoxy(0,5);
+            printf("Vous avez choisi d'arreter, vous pourrer toujours recharger votre sauvegarde plus tard ou commencer une nouvelle partie\n");
+            return 0;
         }
 
     }
@@ -172,10 +224,9 @@ void jouer(Scores* pScore,Contract* objectives,Player* pJoueur){
     int xJoueur=1;
     int yJoueur=1;
     int IsSelected=0;
+    int cpt,tmp;
     char grille[ligne][colonne];
     Grille(grille,pJoueur->level);
-    //affichePlateau(grille,xJoueur,yJoueur,IsSelected);
-    int getch();
     //variables pour la gestion du temps
     clock_t temps_debut,temps_pause,pause=0.0;
     clock_t temps_ecoule;
@@ -193,11 +244,13 @@ void jouer(Scores* pScore,Contract* objectives,Player* pJoueur){
         //affichages
         //affichage du temps écoulé et du score
         gotoxy(0, ligne+4);
-        printf("Temps : %.1f s  ", 90.0-temps_ecoule);
-        affichePlateau(grille,xJoueur,yJoueur,IsSelected,pScore,objectives,pJoueur->level);
+        printf("Temps : %.1f s  ", 60.0-temps_ecoule);
+        affichePlateau(grille,xJoueur,yJoueur,IsSelected,pScore,objectives,pJoueur);
         /* partie évènementielle : ce que fait le programme si l'utilisateur appuie sur une touche */
         if(kbhit()!=0){
-            touche= getch();
+            touche= get_input();
+            gotoxy(30,ligne);
+            printf("touche = %d / (%c)    ",touche,touche);
             if(touche==' '){
                 if(IsSelected){
                     IsSelected=0;
@@ -206,11 +259,55 @@ void jouer(Scores* pScore,Contract* objectives,Player* pJoueur){
                     IsSelected=1;
                 }
             }
+            else if(touche=='1'){
+                temps_pause=clock();
+                if(pJoueur->gold<99){
+                    for(cpt=0;cpt<5;cpt++){
+                        gotoxy(25,ligne);
+                        printf(rouge"PAS ASSEZ DE %c"reset,0x9D);
+                        Sleep(250);
+                        gotoxy(25,ligne);
+                        printf("                 ");
+                        Sleep(250);
+                    }
+                }
+
+                else{
+                    pJoueur->gold-=99;
+                    tmp=pJoueur->gold;
+                    canne_sucre(grille,yJoueur,xJoueur,pScore);
+                    suppression(grille,pScore,xJoueur,yJoueur,IsSelected,objectives,pJoueur,1);
+                    pJoueur->gold=tmp;
+                }
+                pause+=(double)(clock()-temps_pause)/CLOCKS_PER_SEC;
+            }
+            else if(touche=='9'){
+                temps_pause=clock();
+                if(pJoueur->gold<999){
+                    for(cpt=0;cpt<5;cpt++){
+                        gotoxy(25,ligne);
+                        printf(rouge"PAS ASSEZ DE %c"reset,0x9D);
+                        Sleep(250);
+                        gotoxy(25,ligne);
+                        printf("                 ");
+                        Sleep(250);
+                    }
+                }
+                else{
+                    pJoueur->gold-=999;
+                    tmp=pJoueur->gold;
+                    nuke_grille(grille,pScore);
+                    suppression(grille,pScore,xJoueur,yJoueur,IsSelected,objectives,pJoueur,1);
+                    pJoueur->gold=tmp;
+                }
+                pause+=(double)(clock()-temps_pause)/CLOCKS_PER_SEC;
+            }
+
             else if(IsSelected){
                 temps_pause=clock();
                 permutation(grille,xJoueur,yJoueur,touche);
                 deplacement(&xJoueur,&yJoueur,touche);
-                suppression(grille,pScore,xJoueur,yJoueur,IsSelected,objectives,pJoueur->level);
+                suppression(grille,pScore,xJoueur,yJoueur,IsSelected,objectives,pJoueur,0);
                 IsSelected=0;
                 pause+=(double)(clock()-temps_pause)/CLOCKS_PER_SEC;
             }
@@ -219,7 +316,7 @@ void jouer(Scores* pScore,Contract* objectives,Player* pJoueur){
             }
         }
 
-    }while(temps_ecoule<=90);
+    }while(temps_ecoule<=60);
 
 
 
@@ -249,11 +346,13 @@ int main()
     Contract* objectives=&todo;
     srand(time(NULL));
     int choix,continuer=1;
+    int fail;
     clearConsole();
     afficherTitreJeu();
     Sleep(1500);
 
     do{
+        fail=0;
         clearConsole();
         afficherMenuTitre();
         afficherMenuPrincipal();
@@ -280,8 +379,34 @@ int main()
                 break;
             case 2:
                 clearConsole();
-                printf("\tWork in Progress\n");
-                Sleep(1000);
+                FILE* highscores=NULL;
+                highscores=fopen("saves.dat","rb+");
+                if(highscores==NULL){
+                    printf("\n\n\t\taucune sauvegarde trouvee... Veuillez en commencer une nouvelle");
+                    Sleep(2000);
+                    fail=1;
+                }
+                else{
+                    fread(&joueur,sizeof(Player),1,highscores);
+                    fclose(highscores);
+                    gotoxy(15,42);
+                    printf("Bon retour parmis nous"rouge" %s"reset,joueur.name);
+                    hide_cursor();
+                    clearConsole();
+                    animation_nv(pJoueur->name,pJoueur->level);
+                    attendreTouche();
+                    objectives=objectifs(objectives,joueur.level);
+                    jouer(pScore,objectives,pJoueur);
+                    while(continuer==1){
+                        clearConsole();
+                        continuer=partie(pScore,objectives,pJoueur);
+                        if(continuer==1){
+                            pScore=initScores(pScore);
+                            objectives=objectifs(objectives,joueur.level);
+                            jouer(pScore,objectives,pJoueur);
+                        }
+                    }
+                }
                 break;
             case 3:
                 // sous-programme qui affiche les règles du jeu
@@ -292,7 +417,7 @@ int main()
                 printf("AU REVOIR !\n");
                 break;
         }
-    }while((choix!=0) && (choix!=1));
+    }while((choix!=0) && (choix!=1) && (choix!=2) && (fail==1));
 
     if((choix==1) || (choix==2)){
         sauvegarde.lives=0;
@@ -300,22 +425,21 @@ int main()
         sauvegarde.current_best_score=0;
         sauvegarde.all_time_best_score=0;
         pScore->score_total=pScore->scoreF+pScore->scoreM+pScore->scoreO+pScore->scoreP+pScore->scoreS;
-        gotoxy(0,15);
-        pJoueur->current_best_score=pScore->score_total;
-        printf("\t\tScore final : %d\n\n",pScore->score_total);
+        gotoxy(0,13);
+        if(pJoueur->current_best_score<pScore->score_total){
+            pJoueur->current_best_score=pScore->score_total;
+        }
+        printf("\t\tScore final level %d : %d\n",pJoueur->level,pScore->score_total);
+        printf("\t\tMeilleur score de la partie : %d",pJoueur->current_best_score);
         printf("S : %d\nF : %d\nP : %d\nO : %d\nM : %d\n\n\n",pScore->scoreS,pScore->scoreF,pScore->scoreP,pScore->scoreO,pScore->scoreM);
         Sleep(2000);
-
-        /*FILE* check_best_score=NULL;
-        check_best_score=fopen("saves.txt","wb+");
-        fread(&sauvegarde,sizeof(sauvegarde),1,check_best_score);*/
         FILE* highscores=NULL;
         highscores=fopen("saves.dat","rb+");
         if (highscores != NULL) {
             fread(&sauvegarde,sizeof(sauvegarde),1,highscores);
             if(pJoueur->current_best_score > sauvegarde.all_time_best_score){
                 pJoueur->all_time_best_score=pJoueur->current_best_score;
-                printf("NEW HIGHSCORE !!!\n\n");
+                printf(cyan"\t N"reset"E"rouge"W"reset" HIGHSCORE !!!\n\n");
             }
             else{
                pJoueur->all_time_best_score=sauvegarde.all_time_best_score;
@@ -325,13 +449,15 @@ int main()
         else{
             highscores = fopen("saves.dat", "wb+");  // créer le fichier s’il n’existe pas
             pJoueur->all_time_best_score=pJoueur->current_best_score;
+            printf(cyan"\t N"reset"E"rouge"W"reset" HIGHSCORE !!!\n\n");
         }
 
         fwrite(&joueur,sizeof(joueur),1,highscores);
         rewind(highscores);
         fread(&sauvegarde,sizeof(sauvegarde),1,highscores);
-        printf("\n\n\nName : %s\t\tlevel : %d \t\t live : %d\n\n\t\t Meilleur de cette partie : %d\t\tMeilleur score toute sauvegardes confondues : %d\n\n\n",sauvegarde.name,sauvegarde.level,sauvegarde.lives,sauvegarde.current_best_score,sauvegarde.all_time_best_score);
+        printf("\n\n"rouge"Name : %s\t\t"cyan"level : %d \t\t "vert"live : %d"reset"\n\n\t\t Meilleur de cette partie : %d\t\tMeilleur score toute sauvegardes confondues : %d\n\n\n",sauvegarde.name,sauvegarde.level,sauvegarde.lives,sauvegarde.current_best_score,sauvegarde.all_time_best_score);
         fclose(highscores);
+        attendreTouche();
     }
 
 

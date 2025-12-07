@@ -8,6 +8,8 @@
 #include <conio.h>
 #define ligne 25
 #define colonne 45
+#define ligne2 15
+#define colonne2 20
 #define jaune "\e[0;33m"
 #define rouge "\e[0;31m"
 #define vert "\e[0;32m"
@@ -41,6 +43,7 @@ typedef struct player{
     char name[20];
     int level;
     int lives;
+    int gold;
     int current_best_score;
     int all_time_best_score;
 }Player;
@@ -49,7 +52,7 @@ void jouer(Scores* pScore,Contract* objectives,Player* pJoueur);
 void animation_nv(char nom[20],int level);
 void afficheCadre(int largeur,int hauteur);     // Fonction déja fournie dans d'anciens TP
 void Grille(char grille[ligne][colonne],int level);            //Remplis le plateau en respectant les conditions initiales
-void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelected,Scores* pScore,Contract* ojectives,int level);   //Affiche la matrice à l'écran avec les bonnes couleurs et la "position" du joueur
+void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelected,Scores* pScore,Contract* ojectives,Player* pJoueur);   //Affiche la matrice à l'écran avec les bonnes couleurs et la "position" du joueur
                                                                         //IsSelected permet de savoir si la case est sélectionnée,auquel cas elle sera mise en évidence (item en minuscule,etc...)
 Player* initJoueur(Player* pJoueur);
 /*
@@ -62,17 +65,20 @@ void jeu(); //Pour l'instant niveau 1
 void gotoxy(int x, int y);
 void deplacement(int* xJoueur,int* yJoueur,char touche);    //Déplace le joueur dans les limites du plateau
 void permutation(char grille[ligne][colonne],int xJoueur,int yJoueur,char touche);   //Permute un item selectionné avec un autre dans la matrice carré "plateau"
-void suppression(char grille[ligne][colonne],Scores* pScore,int xJoueur,int yJoueur,int IsSelected,Contract* objectives,int level);   //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
+void suppression(char grille[ligne][colonne],Scores* pScore,int xJoueur,int yJoueur,int IsSelected,Contract* objectives,Player* pJoueur,int suppr);   //Regarde si une des règles de suppression et vérifiée, auquel cas remplace tous les items concernés par des ' ' dans plateau
                                     //Si des 'trous' sont formés, fait tomber les items au-dessus par gravité et ajuste le score en conséquence
-int verifLigne(char grille[ligne][colonne], Scores* pScore, int i, int j);
-int verifColonne(char grille[ligne][colonne],Scores* pScore, int i, int j);
-void suppr6(char grille[ligne][colonne], Scores* pScore, char swap);
-void explosion(char grille[ligne][colonne],Scores* pScore,int i,int j);
+void canne_sucre(char grille[ligne][colonne],int xJoueur,int yJoueur,Scores* pScore);
+void nuke_grille(char grille[ligne][colonne],Scores* pScore);
+int verifLigne(char grille[ligne][colonne], Scores* pScore, int i, int j,Player* pJoueur);
+int verifColonne(char grille[ligne][colonne],Scores* pScore, int i, int j,Player* pJoueur);
+void suppr6(char grille[ligne][colonne], Scores* pScore, char swap,Player* pJoueur);
+void explosion(char grille[ligne][colonne],Scores* pScore,int i,int j,Player* pJoueur);
 
 void remplissage(char grille[ligne][colonne],int xJoueur,int yJoueur,int IsSelected,int level);   //Comble les 'trous' du plateau par des items aléatoires*
 void fall(char grille[ligne][colonne]); // fait tomber les items
 void gotoxy(int x,int y);
 void hide_cursor();
+int get_input();
 
 
 /////// PROTOTYPE DE SOUS-PROGRAMME POUR LE MENU ///////////

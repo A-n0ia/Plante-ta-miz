@@ -19,27 +19,17 @@ void animation_nv(char nom[20],int level){
 
 	else if(level==2){
 		char mot[30]="NEXT LEVEL UNLOCKED : 2";
-		for(j=0;j<15;j++){
-			printf("\n");
-		}
-		for(j=0;j<6;j++){
-			printf("\t");
-		}
-
+        gotoxy(6,15);
 		for(i=0;i<25;i++){
 			printf("%c",mot[i]);
 			Sleep(150);
 		}
-		gotoxy(5,25);
+		gotoxy(10,20);
+		printf("Des %c apparaitront maintenant de tant en tant. Mettez-les en début ou fin de combos pour creer une explosion !",0x0F);
     }
 	else if(level==3){
 		char mot[30]="NEXT LEVEL UNLOCKED : 3";
-		for(j=0;j<15;j++){
-			printf("\n");
-		}
-		for(j=0;j<6;j++){
-			printf("\t");
-		}
+		gotoxy(6,15);
 
 		for(i=0;i<25;i++){
 			printf("%c",mot[i]);

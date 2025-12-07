@@ -1,11 +1,17 @@
 #include "paramitz.h"
 
 
-void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelected,Scores* pScore,Contract* objectives,int level){
+void affichePlateau(char tab[ligne][colonne],int xJoueur,int yJoueur,int IsSelected,Scores* pScore,Contract* objectives,Player* pJoueur){
+    gotoxy(2,ligne);
+    printf(jaune"%c : %d         "reset,0x9D,pJoueur->gold);
+    gotoxy(2,ligne+1);
+    printf("1 : petit boom --"jaune" %d / 99      "reset,pJoueur->gold);
+    gotoxy(40,ligne+1);
+    printf("9 : gros boom --"jaune" %d / 999          "reset,pJoueur->gold);
     gotoxy(0, ligne+3);
     printf(jaune"S"reset" : %d / %d\t"rouge"F"reset" : %d / %d\t"vert"P"reset" : %d / %d\tO : %d / %d\t"cyan"M"reset" : %d / %d",(*pScore).scoreS,objectives->scoreS,(*pScore).scoreF,objectives->scoreF,(*pScore).scoreP,objectives->scoreP,(*pScore).scoreO,objectives->scoreO,(*pScore).scoreM,objectives->scoreM);
     gotoxy(0,ligne+2);
-    printf("level = %d",level);
+    printf("level = %d",pJoueur->level);
     gotoxy(0,0);
     for(int i=0;i<ligne;i++){
         for(int j=0;j<colonne;j++){
