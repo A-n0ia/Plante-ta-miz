@@ -1,6 +1,0 @@
-git commit -m "feat: implement special items system
-
-- Add bomb item with 3x3 explosion radius
-- Implement rainbow item for row/column clearance
-- Add stone obstacles requiring multiple hits
-- Special item spawning with 5% probability"
